@@ -33,6 +33,7 @@ namespace Vviewer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             this.Drop = new System.Windows.Forms.Panel();
             this.imgBOX = new System.Windows.Forms.PictureBox();
+            this.listName = new System.Windows.Forms.ListBox();
             this.Drop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
             this.SuspendLayout();
@@ -40,6 +41,10 @@ namespace Vviewer
             // Drop
             // 
             this.Drop.AllowDrop = true;
+            this.Drop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Drop.Controls.Add(this.listName);
             this.Drop.Controls.Add(this.imgBOX);
             this.Drop.Location = new System.Drawing.Point(2, 2);
             this.Drop.Name = "Drop";
@@ -61,6 +66,16 @@ namespace Vviewer
             this.imgBOX.TabIndex = 2;
             this.imgBOX.TabStop = false;
             // 
+            // listName
+            // 
+            this.listName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listName.FormattingEnabled = true;
+            this.listName.Location = new System.Drawing.Point(3, 3);
+            this.listName.Name = "listName";
+            this.listName.Size = new System.Drawing.Size(204, 719);
+            this.listName.TabIndex = 3;
+            // 
             // UI
             // 
             this.AllowDrop = true;
@@ -72,6 +87,7 @@ namespace Vviewer
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1515, 860);
             this.Name = "UI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vviewer";
             this.Load += new System.EventHandler(this.UI_Load);
             this.Drop.ResumeLayout(false);
@@ -84,6 +100,7 @@ namespace Vviewer
 
         private System.Windows.Forms.Panel Drop;
         private System.Windows.Forms.PictureBox imgBOX;
+        private System.Windows.Forms.ListBox listName;
     }
 }
 
