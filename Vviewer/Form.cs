@@ -25,13 +25,34 @@ namespace Vviewer
         Hashtable ListFiles = new Hashtable();
         List<String> NaneList = new List<String>();
 
+
+        Hashtable ViolationCode = new Hashtable();
+
+        void HashVuolation()
+        {
+            ViolationCode.Add("0", "0 - Stream");
+            ViolationCode.Add("2", "2 - OverSpeed");
+            ViolationCode.Add("4", "4 - WrongDirection");
+            ViolationCode.Add("5", "5 - BusLane");
+            ViolationCode.Add("10", "10 - RedLightCross");
+            ViolationCode.Add("31", "31 - SeatBelt");
+            ViolationCode.Add("81", "81 - WrongCross");
+            ViolationCode.Add("83", "83 - StopLine");
+            ViolationCode.Add("90", "90 - WrongTurnTwoFrontier");
+            ViolationCode.Add("112", "112 - WrongLineTurn");
+            ViolationCode.Add("113", "113 - NoForwardZnak");
+            ViolationCode.Add("114", "114 - NoUTurnOnlyForward");
+            ViolationCode.Add("127", "127 - Lights");
+        }
+
         void UI_Load(object sender, EventArgs e)
         {
             string folders = Application.StartupPath.ToString();
             FolderSource.Text = folders;
             FolderSave.Text = folders;
-            ViolatiosBox.Items.Add("Violations ALL");
+            ViolatiosBox.Items.Add("ALL - Violations");
             ViolatiosBox.SelectedIndex = 0;
+            HashVuolation();
 
         }
 
@@ -224,7 +245,6 @@ namespace Vviewer
 
                 if (!regno.Equals("{db.CarNumber}"))
                 {
-
                     String NameFile = Path.GetFileName(filename);
 
                     if (ListFiles.ContainsKey(NameFile))
@@ -237,7 +257,14 @@ namespace Vviewer
 
                     if (ViolatiosBox.FindString(violation_box[0].InnerText) == -1)
                     {
-                        ViolatiosBox.Items.Add(violation_box[0].InnerText);
+                        if (ViolationCode.ContainsKey(violation_box[0].InnerText))
+                        {
+                            ViolatiosBox.Items.Add((string)ViolationCode[violation_box[0].InnerText]);
+                        }
+                        else
+                        {
+                            ViolatiosBox.Items.Add(violation_box[0].InnerText);
+                        }
                     }
                 }
             }
