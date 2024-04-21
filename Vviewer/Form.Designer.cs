@@ -40,11 +40,11 @@ namespace Vviewer
             this.SelectFolderSource = new System.Windows.Forms.Button();
             this.SelectFolderSave = new System.Windows.Forms.Button();
             this.Сlear = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CountFiles = new System.Windows.Forms.Label();
             this.SaveCurrent = new System.Windows.Forms.Button();
             this.SaveAll = new System.Windows.Forms.Button();
             this.ViolationtApply = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ViolatiosBox = new System.Windows.Forms.ComboBox();
             this.Drop.SuspendLayout();
             this.Control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
@@ -70,11 +70,11 @@ namespace Vviewer
             // 
             this.Control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Control.Controls.Add(this.comboBox1);
+            this.Control.Controls.Add(this.ViolatiosBox);
             this.Control.Controls.Add(this.ViolationtApply);
             this.Control.Controls.Add(this.SaveAll);
             this.Control.Controls.Add(this.SaveCurrent);
-            this.Control.Controls.Add(this.label1);
+            this.Control.Controls.Add(this.CountFiles);
             this.Control.Controls.Add(this.Сlear);
             this.Control.Controls.Add(this.SelectFolderSave);
             this.Control.Controls.Add(this.SelectFolderSource);
@@ -174,15 +174,15 @@ namespace Vviewer
             this.Сlear.UseVisualStyleBackColor = true;
             this.Сlear.Click += new System.EventHandler(this.Сlear_Click);
             // 
-            // label1
+            // CountFiles
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 31);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Files: ";
+            this.CountFiles.AutoSize = true;
+            this.CountFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountFiles.Location = new System.Drawing.Point(5, 9);
+            this.CountFiles.Name = "CountFiles";
+            this.CountFiles.Size = new System.Drawing.Size(110, 31);
+            this.CountFiles.TabIndex = 5;
+            this.CountFiles.Text = "Files: 0";
             // 
             // SaveCurrent
             // 
@@ -223,16 +223,16 @@ namespace Vviewer
             this.ViolationtApply.UseVisualStyleBackColor = true;
             this.ViolationtApply.Click += new System.EventHandler(this.ViolationtApply_Click);
             // 
-            // comboBox1
+            // ViolatiosBox
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ViolatiosBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(240, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(220, 32);
-            this.comboBox1.TabIndex = 9;
+            this.ViolatiosBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ViolatiosBox.FormattingEnabled = true;
+            this.ViolatiosBox.Location = new System.Drawing.Point(240, 10);
+            this.ViolatiosBox.Name = "ViolatiosBox";
+            this.ViolatiosBox.Size = new System.Drawing.Size(220, 32);
+            this.ViolatiosBox.TabIndex = 9;
             // 
             // UI
             // 
@@ -267,11 +267,11 @@ namespace Vviewer
         private System.Windows.Forms.Button SelectFolderSave;
         private System.Windows.Forms.Button SelectFolderSource;
         private System.Windows.Forms.Button Сlear;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label CountFiles;
         private System.Windows.Forms.Button SaveAll;
         private System.Windows.Forms.Button SaveCurrent;
         private System.Windows.Forms.Button ViolationtApply;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ViolatiosBox;
     }
 }
 

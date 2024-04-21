@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
+using System.Collections.Generic;
+using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -6,6 +9,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Reflection;
+using static System.Net.WebRequestMethods;
 
 namespace Vviewer
 {
@@ -16,8 +22,16 @@ namespace Vviewer
             InitializeComponent();
         }
 
+        Hashtable ListFiles = new Hashtable();
+        List<String> NaneList = new List<String>();
+
         void UI_Load(object sender, EventArgs e)
         {
+            string folders = Application.StartupPath.ToString();
+            FolderSource.Text = folders;
+            FolderSave.Text = folders;
+            ViolatiosBox.Items.Add("Violations ALL");
+            ViolatiosBox.SelectedIndex = 0;
 
         }
 
@@ -59,9 +73,8 @@ namespace Vviewer
             });
         }
 
-        private void Drop_DragDrop(object sender, DragEventArgs e)
+        void Drop_DragDrop(object sender, DragEventArgs e)
         {
-            XmlDocument xFile = new XmlDocument();
             foreach (string obj in (string[])e.Data.GetData(DataFormats.FileDrop))
             {
                 if (Directory.Exists(obj))
@@ -70,114 +83,182 @@ namespace Vviewer
                 }
                 else
                 {
-                    xFile.Load(obj);
-                    if (xFile.SelectSingleNode("//v_photo_ts") != null)
-                    {
-                        XmlNodeList xmlregno = xFile.GetElementsByTagName("v_regno");
-                        string regno = xmlregno[0].InnerText;
-
-                        if (!regno.Equals("{db.CarNumber}"))
-                        {
-                            String NameFile = Path.GetFileName(obj);
-
-                            if (ListFiles.ContainsKey(NameFile))
-                            {
-                                NameFile = NameCreation(NameFile);
-                            }
-
-                            ListFiles.Add(NameFile, obj);
-                            listName.Items.Add(NameFile);
-                        }
-                    }
+                    ReadFile(obj);
                 }
             }
 
             if (listName.Items.Count > 0)
             {
                 listName.SetSelected(0, true);
+                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
             }
+            else
+            {
+                CountFiles.Text = "Files: 0";
+            }
+            Drop.CreateGraphics().Clear(SystemColors.Control);
         }
 
-        private void listName_SelectedIndexChanged(object sender, EventArgs e)
+        void listName_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedCountry = listName.SelectedItem.ToString();
             string x = (string)ListFiles[selectedCountry];
             ViewerIMG(x);
-            //label1.Text = selectedCountry;
         }
 
 
 
-        private void Сlear_Click(object sender, EventArgs e)
+        void Сlear_Click(object sender, EventArgs e)
         {
             listName.Items.Clear();
-/*            ListFiles.Clear();*/
+            ListFiles.Clear();
+            ViolatiosBox.Items.Clear();
+            CountFiles.Text = "Files: 0";
             imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
         }
 
-        private void ViolationtApply_Click(object sender, EventArgs e)
+        void ViolationtApply_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void SelectFolderSource_Click(object sender, EventArgs e)
+        void SelectFolderSource_Click(object sender, EventArgs e)
         {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = FolderSource.Text;
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = true;
 
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                FolderSource.Text = dialog.FileName;
+                ReadFolder(FolderSource.Text);
+            }
+
+            if (listName.Items.Count > 0)
+            {
+                listName.SetSelected(0, true);
+                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+            }
+            else
+            {
+                CountFiles.Text = "Files: 0";
+            }
         }
 
-        private void SelectFolderSave_Click(object sender, EventArgs e)
+        void SelectFolderSave_Click(object sender, EventArgs e)
         {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = FolderSave.Text;
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = true;
 
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                FolderSave.Text = dialog.FileName;
+            }
         }
 
-        private void SaveCurrent_Click(object sender, EventArgs e)
+        void SaveCurrent_Click(object sender, EventArgs e)
         {
+            if (listName.Items.Count > 0)
+            {
+                Сlear.Enabled = false;
+                SelectFolderSource.Enabled = false;
+                SelectFolderSave.Enabled = false;
+                SaveCurrent.Enabled = false;
+                SaveAll.Enabled = false;
 
+                string selectedCountry = listName.SelectedItem.ToString();
+                string filePatch = (string)ListFiles[selectedCountry];
+                SaveViolation(filePatch, FolderSave.Text);
+
+                Сlear.Enabled = true;
+                SelectFolderSource.Enabled = true;
+                SelectFolderSave.Enabled = true;
+                SaveCurrent.Enabled = true;
+                SaveAll.Enabled = true;
+            }
         }
 
-        private void SaveAll_Click(object sender, EventArgs e)
+        void SaveAll_Click(object sender, EventArgs e)
         {
+            if (listName.Items.Count > 0)
+            {
+                Сlear.Enabled = false;
+                SelectFolderSource.Enabled = false;
+                SelectFolderSave.Enabled = false;
+                SaveCurrent.Enabled = false;
+                SaveAll.Enabled = false;
 
+
+                ICollection keys = ListFiles.Keys;
+                int y = 0;
+                foreach (string name in keys)
+                {
+                    string x = (string)ListFiles[name];
+                    listName.SetSelected(y, true);
+                    SaveViolation(x, FolderSave.Text);
+                    y++;
+                }
+
+                Сlear.Enabled = true;
+                SelectFolderSource.Enabled = true;
+                SelectFolderSave.Enabled = true;
+                SaveCurrent.Enabled = true;
+                SaveAll.Enabled = true;
+            }
         }
 
 
+
+        void ReadFile(string filename)
+        {
+            XmlDocument xFile = new XmlDocument();
+            xFile.Load(filename);
+            if (xFile.SelectSingleNode("//v_photo_ts") != null)
+            {
+                XmlNodeList violation_box = xFile.GetElementsByTagName("v_pr_viol");
+                XmlNodeList xmlregno = xFile.GetElementsByTagName("v_regno");
+                string regno = xmlregno[0].InnerText;
+
+                if (!regno.Equals("{db.CarNumber}"))
+                {
+
+                    String NameFile = Path.GetFileName(filename);
+
+                    if (ListFiles.ContainsKey(NameFile))
+                    {
+                        NameFile = NameCreation(NameFile);
+                    }
+
+                    ListFiles.Add(NameFile, filename);
+                    listName.Items.Add(NameFile);
+
+                    if (ViolatiosBox.FindString(violation_box[0].InnerText) == -1)
+                    {
+                        ViolatiosBox.Items.Add(violation_box[0].InnerText);
+                    }
+                }
+            }
+        }
 
         void ReadFolder(string path)
         {
-            XmlDocument xFile = new XmlDocument();
             string[] tempfiles = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
 
-            if (!Application.OpenForms.OfType<Form2>().Any())
+/*            if (!Application.OpenForms.OfType<Form2>().Any())
             {
                 secondForm = new Form2();
                 secondForm.progressbarValue = 0;
                 secondForm.progressbarMax = tempfiles.Count();
                 secondForm.Show();
-            }
+            }*/
 
             foreach (string file in tempfiles)
             {
-                secondForm.progressbarValue++;
-                xFile.Load(file);
-                if (xFile.SelectSingleNode("//v_photo_ts") != null)
-                {
-                    XmlNodeList xmlregno = xFile.GetElementsByTagName("v_regno");
-                    string regno = xmlregno[0].InnerText;
-
-                    if (!regno.Equals("{db.CarNumber}"))
-                    {
-
-                        String NameFile = Path.GetFileName(file);
-
-                        if (ListFiles.ContainsKey(NameFile))
-                        {
-                            NameFile = NameCreation(NameFile);
-                        }
-
-                        ListFiles.Add(NameFile, file);
-                        listName.Items.Add(NameFile);
-                    }
-                }
+                //secondForm.progressbarValue++;
+                ReadFile(file);
             }
         }
 
@@ -282,8 +363,5 @@ namespace Vviewer
             }
 
         }
-
-
-
     }
 }
