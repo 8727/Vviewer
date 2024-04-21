@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Linq;
 using System.Threading;
+using System.Windows.Input;
 
 namespace Vviewer
 {
@@ -22,8 +23,6 @@ namespace Vviewer
 
         Hashtable ListFiles = new Hashtable();
         List<String> NaneList = new List<String>();
-
-
         Hashtable ViolationCode = new Hashtable();
 
         void HashVuolation()
@@ -53,7 +52,6 @@ namespace Vviewer
             CameraBox.Items.Add("ALL - Cameras");
             CameraBox.SelectedIndex = 0;
             HashVuolation();
-
         }
 
         string NameCreation(string name)
@@ -111,6 +109,7 @@ namespace Vviewer
                              ReadFile(obj);
                         }
                     }
+
                     if (listName.Items.Count > 0)
                     {
                         listName.SetSelected(0, true);
@@ -128,8 +127,8 @@ namespace Vviewer
         void listName_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedCountry = listName.SelectedItem.ToString();
-            string x = (string)ListFiles[selectedCountry];
-            ViewerIMG(x);
+            string[] x = (string[])ListFiles[selectedCountry];
+            ViewerIMG(x[2]);
         }
 
 
@@ -142,11 +141,60 @@ namespace Vviewer
             CameraBox.Items.Clear();
             CountFiles.Text = "Files: 0";
             imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+            ViolatiosBox.Items.Add("ALL - Violations");
+            ViolatiosBox.SelectedIndex = 0;
+            CameraBox.Items.Add("ALL - Cameras");
+            CameraBox.SelectedIndex = 0;
         }
 
         void ViolationtApply_Click(object sender, EventArgs e)
         {
+            if (ListFiles.Count > 0)
+            {
+                listName.Items.Clear();
+                CountFiles.Text = "Files: 0";
+                imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
 
+                if (ViolatiosBox.SelectedIndex >= 0 && CameraBox.SelectedIndex >= 0)
+                {
+                    ICollection keys = ListFiles.Keys;
+                    foreach (String NameFile in keys)
+                    {
+                        string[] filePatch = (string[])ListFiles[NameFile];
+                        string searchViolationListFiles = filePatch[0];
+                        string searchViolation = (string)ViolationCode[searchViolationListFiles];
+                        string searchCamera = filePatch[1];
+
+                        //label1.Text = searchViolationListFiles;
+
+                        if (searchCamera == CameraBox.SelectedItem.ToString() || CameraBox.SelectedIndex == 0)
+                        {
+                            if(searchViolation == ViolatiosBox.SelectedItem.ToString() || ViolatiosBox.SelectedIndex == 0)
+                            {
+                                //label1.Text = searchViolation;
+                                listName.Items.Add(NameFile);
+                            }
+                        }
+                    }
+                    if (listName.Items.Count > 0)
+                    {
+                        listName.SetSelected(0, true);
+                        CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+                    }
+                    else
+                    {
+                        CountFiles.Text = "Files: 0";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select a camera or violation from the drop-down list.", "Selection Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         void SelectFolderSource_Click(object sender, EventArgs e)
@@ -204,14 +252,18 @@ namespace Vviewer
                 SaveAll.Enabled = false;
 
                 string selectedCountry = listName.SelectedItem.ToString();
-                string filePatch = (string)ListFiles[selectedCountry];
-                SaveViolation(filePatch, FolderSave.Text);
+                string[] filePatch = (string[])ListFiles[selectedCountry];
+                SaveViolation(filePatch[2], FolderSave.Text);
 
                 Сlear.Enabled = true;
                 SelectFolderSource.Enabled = true;
                 SelectFolderSave.Enabled = true;
                 SaveCurrent.Enabled = true;
                 SaveAll.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -232,9 +284,9 @@ namespace Vviewer
                 {
                     foreach (string name in keys)
                     {
-                        string x = (string)ListFiles[name];
+                        string[] x = (string[])ListFiles[name];
                         listName.SetSelected(y, true);
-                        SaveViolation(x, FolderSave.Text);
+                        SaveViolation(x[2], FolderSave.Text);
                         y++;
                     }
                 });
@@ -244,6 +296,10 @@ namespace Vviewer
                 SelectFolderSave.Enabled = true;
                 SaveCurrent.Enabled = true;
                 SaveAll.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -255,9 +311,11 @@ namespace Vviewer
             xFile.Load(filename);
             if (xFile.SelectSingleNode("//v_photo_ts") != null)
             {
-                XmlNodeList xmlviolation= xFile.GetElementsByTagName("v_pr_viol");
+                XmlNodeList xmlviolation = xFile.GetElementsByTagName("v_pr_viol");
                 XmlNodeList xmlcamera = xFile.GetElementsByTagName("v_camera");
                 XmlNodeList xmlregno = xFile.GetElementsByTagName("v_regno");
+                string violation = xmlviolation[0].InnerText;
+                string camera = xmlcamera[0].InnerText;
                 string regno = xmlregno[0].InnerText;
 
                 if (!regno.Equals("{db.CarNumber}"))
@@ -269,23 +327,24 @@ namespace Vviewer
                         NameFile = NameCreation(NameFile);
                     }
 
-                    ListFiles.Add(NameFile, filename);
+                    string[] date = { violation, camera, filename };
+                    ListFiles.Add(NameFile, date);
                     listName.Items.Add(NameFile);
 
-                    if (ViolatiosBox.FindString(xmlviolation[0].InnerText) == -1)
+                    if (ViolatiosBox.FindString(violation) == -1)
                     {
-                        if (ViolationCode.ContainsKey(xmlviolation[0].InnerText))
+                        if (ViolationCode.ContainsKey(violation))
                         {
-                            ViolatiosBox.Items.Add((string)ViolationCode[xmlviolation[0].InnerText]);
+                            ViolatiosBox.Items.Add((string)ViolationCode[violation]);
                         }
                         else
                         {
-                            ViolatiosBox.Items.Add(xmlviolation[0].InnerText);
+                            ViolatiosBox.Items.Add(violation);
                         }
                     }
-                    if (CameraBox.FindString(xmlcamera[0].InnerText) == -1)
+                    if (CameraBox.FindString(camera) == -1)
                     {
-                        CameraBox.Items.Add(xmlcamera[0].InnerText);
+                        CameraBox.Items.Add(camera);
                     }
 
                 }
