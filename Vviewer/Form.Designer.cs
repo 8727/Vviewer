@@ -34,6 +34,7 @@ namespace Vviewer
             this.Drop = new System.Windows.Forms.Panel();
             this.imgBOX = new System.Windows.Forms.PictureBox();
             this.listName = new System.Windows.Forms.ListBox();
+            this.Control = new System.Windows.Forms.GroupBox();
             this.Drop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
             this.SuspendLayout();
@@ -44,6 +45,7 @@ namespace Vviewer
             this.Drop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Drop.Controls.Add(this.Control);
             this.Drop.Controls.Add(this.listName);
             this.Drop.Controls.Add(this.imgBOX);
             this.Drop.Location = new System.Drawing.Point(2, 2);
@@ -76,6 +78,16 @@ namespace Vviewer
             this.listName.Size = new System.Drawing.Size(204, 719);
             this.listName.TabIndex = 3;
             // 
+            // Control
+            // 
+            this.Control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Control.Location = new System.Drawing.Point(4, 723);
+            this.Control.Name = "Control";
+            this.Control.Size = new System.Drawing.Size(1489, 91);
+            this.Control.TabIndex = 4;
+            this.Control.TabStop = false;
+            // 
             // UI
             // 
             this.AllowDrop = true;
@@ -101,6 +113,7 @@ namespace Vviewer
         private System.Windows.Forms.Panel Drop;
         private System.Windows.Forms.PictureBox imgBOX;
         private System.Windows.Forms.ListBox listName;
+        private System.Windows.Forms.GroupBox Control;
     }
 }
 
