@@ -1,17 +1,15 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Collections.Generic;
 using System.Collections;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using System.Reflection;
-using static System.Net.WebRequestMethods;
+using System.Linq;
+using System.Threading;
 
 namespace Vviewer
 {
@@ -98,28 +96,33 @@ namespace Vviewer
 
         void Drop_DragDrop(object sender, DragEventArgs e)
         {
-            foreach (string obj in (string[])e.Data.GetData(DataFormats.FileDrop))
+            new Thread(() =>
             {
-                if (Directory.Exists(obj))
+                Invoke((MethodInvoker)(() =>
                 {
-                    ReadFolder(obj);
-                }
-                else
-                {
-                    ReadFile(obj);
-                }
-            }
-
-            if (listName.Items.Count > 0)
-            {
-                listName.SetSelected(0, true);
-                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
-            }
-            else
-            {
-                CountFiles.Text = "Files: 0";
-            }
-            Drop.CreateGraphics().Clear(SystemColors.Control);
+                    foreach (string obj in (string[])e.Data.GetData(DataFormats.FileDrop))
+                    {
+                        if (Directory.Exists(obj))
+                        {
+                            ReadFolder(obj);
+                        }
+                        else
+                        {
+                             ReadFile(obj);
+                        }
+                    }
+                    if (listName.Items.Count > 0)
+                    {
+                        listName.SetSelected(0, true);
+                        CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+                    }
+                    else
+                    {
+                        CountFiles.Text = "Files: 0";
+                    }
+                        Drop.CreateGraphics().Clear(SystemColors.Control);
+                }));
+            }).Start();
         }
 
         void listName_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,6 +139,7 @@ namespace Vviewer
             listName.Items.Clear();
             ListFiles.Clear();
             ViolatiosBox.Items.Clear();
+            CameraBox.Items.Clear();
             CountFiles.Text = "Files: 0";
             imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
         }
@@ -155,17 +159,24 @@ namespace Vviewer
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 FolderSource.Text = dialog.FileName;
-                ReadFolder(FolderSource.Text);
-            }
 
-            if (listName.Items.Count > 0)
-            {
-                listName.SetSelected(0, true);
-                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
-            }
-            else
-            {
-                CountFiles.Text = "Files: 0";
+                new Thread(() =>
+                {
+                    Invoke((MethodInvoker)(() =>
+                    {
+                        ReadFolder(FolderSource.Text);
+
+                        if (listName.Items.Count > 0)
+                        {
+                            listName.SetSelected(0, true);
+                            CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+                        }
+                        else
+                        {
+                            CountFiles.Text = "Files: 0";
+                        }
+                    }));
+                }).Start();
             }
         }
 
@@ -204,7 +215,7 @@ namespace Vviewer
             }
         }
 
-        void SaveAll_Click(object sender, EventArgs e)
+        async void SaveAll_Click(object sender, EventArgs e)
         {
             if (listName.Items.Count > 0)
             {
@@ -217,13 +228,16 @@ namespace Vviewer
 
                 ICollection keys = ListFiles.Keys;
                 int y = 0;
-                foreach (string name in keys)
+                await Task.Run(() =>
                 {
-                    string x = (string)ListFiles[name];
-                    listName.SetSelected(y, true);
-                    SaveViolation(x, FolderSave.Text);
-                    y++;
-                }
+                    foreach (string name in keys)
+                    {
+                        string x = (string)ListFiles[name];
+                        listName.SetSelected(y, true);
+                        SaveViolation(x, FolderSave.Text);
+                        y++;
+                    }
+                });
 
                 Сlear.Enabled = true;
                 SelectFolderSource.Enabled = true;
@@ -281,20 +295,16 @@ namespace Vviewer
         void ReadFolder(string path)
         {
             string[] tempfiles = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
-
-/*            if (!Application.OpenForms.OfType<Form2>().Any())
-            {
-                secondForm = new Form2();
-                secondForm.progressbarValue = 0;
-                secondForm.progressbarMax = tempfiles.Count();
-                secondForm.Show();
-            }*/
+            progressBar.Maximum = tempfiles.Count();
+            progressBar.Visible = true;
+            progressBar.Value = 0;
 
             foreach (string file in tempfiles)
             {
-                //secondForm.progressbarValue++;
+                progressBar.PerformStep();
                 ReadFile(file);
             }
+            progressBar.Visible = false;
         }
 
         void ViewerIMG(string pathXML)

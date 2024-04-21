@@ -32,21 +32,22 @@ namespace Vviewer
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             this.Drop = new System.Windows.Forms.Panel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.Control = new System.Windows.Forms.GroupBox();
+            this.CameraBox = new System.Windows.Forms.ComboBox();
+            this.ViolatiosBox = new System.Windows.Forms.ComboBox();
+            this.ViolationtApply = new System.Windows.Forms.Button();
+            this.SaveAll = new System.Windows.Forms.Button();
+            this.SaveCurrent = new System.Windows.Forms.Button();
+            this.CountFiles = new System.Windows.Forms.Label();
+            this.Сlear = new System.Windows.Forms.Button();
+            this.SelectFolderSave = new System.Windows.Forms.Button();
+            this.SelectFolderSource = new System.Windows.Forms.Button();
+            this.FolderSave = new System.Windows.Forms.TextBox();
+            this.FolderSource = new System.Windows.Forms.TextBox();
             this.listName = new System.Windows.Forms.ListBox();
             this.imgBOX = new System.Windows.Forms.PictureBox();
-            this.FolderSource = new System.Windows.Forms.TextBox();
-            this.FolderSave = new System.Windows.Forms.TextBox();
-            this.SelectFolderSource = new System.Windows.Forms.Button();
-            this.SelectFolderSave = new System.Windows.Forms.Button();
-            this.Сlear = new System.Windows.Forms.Button();
-            this.CountFiles = new System.Windows.Forms.Label();
-            this.SaveCurrent = new System.Windows.Forms.Button();
-            this.SaveAll = new System.Windows.Forms.Button();
-            this.ViolationtApply = new System.Windows.Forms.Button();
-            this.ViolatiosBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CameraBox = new System.Windows.Forms.ComboBox();
             this.Drop.SuspendLayout();
             this.Control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
@@ -58,6 +59,7 @@ namespace Vviewer
             this.Drop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Drop.Controls.Add(this.progressBar);
             this.Drop.Controls.Add(this.label1);
             this.Drop.Controls.Add(this.Control);
             this.Drop.Controls.Add(this.listName);
@@ -68,6 +70,28 @@ namespace Vviewer
             this.Drop.TabIndex = 0;
             this.Drop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Drop_DragDrop);
             this.Drop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Drop_DragEnter);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(219, 682);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(1267, 35);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 6;
+            this.progressBar.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(116, 490);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 25);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
             // 
             // Control
             // 
@@ -89,6 +113,136 @@ namespace Vviewer
             this.Control.Size = new System.Drawing.Size(1489, 91);
             this.Control.TabIndex = 4;
             this.Control.TabStop = false;
+            // 
+            // CameraBox
+            // 
+            this.CameraBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.CameraBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CameraBox.FormattingEnabled = true;
+            this.CameraBox.Location = new System.Drawing.Point(399, 10);
+            this.CameraBox.Name = "CameraBox";
+            this.CameraBox.Size = new System.Drawing.Size(180, 32);
+            this.CameraBox.TabIndex = 10;
+            // 
+            // ViolatiosBox
+            // 
+            this.ViolatiosBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ViolatiosBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ViolatiosBox.FormattingEnabled = true;
+            this.ViolatiosBox.Location = new System.Drawing.Point(215, 10);
+            this.ViolatiosBox.Name = "ViolatiosBox";
+            this.ViolatiosBox.Size = new System.Drawing.Size(180, 32);
+            this.ViolatiosBox.TabIndex = 9;
+            // 
+            // ViolationtApply
+            // 
+            this.ViolationtApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ViolationtApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ViolationtApply.Location = new System.Drawing.Point(215, 49);
+            this.ViolationtApply.Name = "ViolationtApply";
+            this.ViolationtApply.Size = new System.Drawing.Size(364, 38);
+            this.ViolationtApply.TabIndex = 8;
+            this.ViolationtApply.Text = "Apply";
+            this.ViolationtApply.UseVisualStyleBackColor = true;
+            this.ViolationtApply.Click += new System.EventHandler(this.ViolationtApply_Click);
+            // 
+            // SaveAll
+            // 
+            this.SaveAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveAll.Location = new System.Drawing.Point(1295, 49);
+            this.SaveAll.Name = "SaveAll";
+            this.SaveAll.Size = new System.Drawing.Size(192, 38);
+            this.SaveAll.TabIndex = 7;
+            this.SaveAll.Text = "Save All";
+            this.SaveAll.UseVisualStyleBackColor = true;
+            this.SaveAll.Click += new System.EventHandler(this.SaveAll_Click);
+            // 
+            // SaveCurrent
+            // 
+            this.SaveCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveCurrent.Location = new System.Drawing.Point(1295, 9);
+            this.SaveCurrent.Name = "SaveCurrent";
+            this.SaveCurrent.Size = new System.Drawing.Size(192, 38);
+            this.SaveCurrent.TabIndex = 6;
+            this.SaveCurrent.Text = "Save Current";
+            this.SaveCurrent.UseVisualStyleBackColor = true;
+            this.SaveCurrent.Click += new System.EventHandler(this.SaveCurrent_Click);
+            // 
+            // CountFiles
+            // 
+            this.CountFiles.AutoSize = true;
+            this.CountFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountFiles.Location = new System.Drawing.Point(5, 9);
+            this.CountFiles.Name = "CountFiles";
+            this.CountFiles.Size = new System.Drawing.Size(110, 31);
+            this.CountFiles.TabIndex = 5;
+            this.CountFiles.Text = "Files: 0";
+            // 
+            // Сlear
+            // 
+            this.Сlear.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Сlear.Location = new System.Drawing.Point(3, 49);
+            this.Сlear.Name = "Сlear";
+            this.Сlear.Size = new System.Drawing.Size(202, 38);
+            this.Сlear.TabIndex = 4;
+            this.Сlear.Text = "Сlear";
+            this.Сlear.UseVisualStyleBackColor = true;
+            this.Сlear.Click += new System.EventHandler(this.Сlear_Click);
+            // 
+            // SelectFolderSave
+            // 
+            this.SelectFolderSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectFolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectFolderSave.Location = new System.Drawing.Point(591, 49);
+            this.SelectFolderSave.Name = "SelectFolderSave";
+            this.SelectFolderSave.Size = new System.Drawing.Size(284, 38);
+            this.SelectFolderSave.TabIndex = 3;
+            this.SelectFolderSave.Text = "Select a folder to save";
+            this.SelectFolderSave.UseVisualStyleBackColor = true;
+            this.SelectFolderSave.Click += new System.EventHandler(this.SelectFolderSave_Click);
+            // 
+            // SelectFolderSource
+            // 
+            this.SelectFolderSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectFolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectFolderSource.Location = new System.Drawing.Point(591, 9);
+            this.SelectFolderSource.Name = "SelectFolderSource";
+            this.SelectFolderSource.Size = new System.Drawing.Size(284, 38);
+            this.SelectFolderSource.TabIndex = 2;
+            this.SelectFolderSource.Text = "Select download folder";
+            this.SelectFolderSource.UseVisualStyleBackColor = true;
+            this.SelectFolderSource.Click += new System.EventHandler(this.SelectFolderSource_Click);
+            // 
+            // FolderSave
+            // 
+            this.FolderSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FolderSave.Location = new System.Drawing.Point(881, 52);
+            this.FolderSave.Name = "FolderSave";
+            this.FolderSave.Size = new System.Drawing.Size(398, 29);
+            this.FolderSave.TabIndex = 1;
+            // 
+            // FolderSource
+            // 
+            this.FolderSource.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FolderSource.Location = new System.Drawing.Point(881, 14);
+            this.FolderSource.Name = "FolderSource";
+            this.FolderSource.Size = new System.Drawing.Size(398, 29);
+            this.FolderSource.TabIndex = 0;
             // 
             // listName
             // 
@@ -118,146 +272,6 @@ namespace Vviewer
             this.imgBOX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgBOX.TabIndex = 2;
             this.imgBOX.TabStop = false;
-            // 
-            // FolderSource
-            // 
-            this.FolderSource.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FolderSource.Location = new System.Drawing.Point(881, 14);
-            this.FolderSource.Name = "FolderSource";
-            this.FolderSource.Size = new System.Drawing.Size(398, 29);
-            this.FolderSource.TabIndex = 0;
-            // 
-            // FolderSave
-            // 
-            this.FolderSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FolderSave.Location = new System.Drawing.Point(881, 52);
-            this.FolderSave.Name = "FolderSave";
-            this.FolderSave.Size = new System.Drawing.Size(398, 29);
-            this.FolderSave.TabIndex = 1;
-            // 
-            // SelectFolderSource
-            // 
-            this.SelectFolderSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.SelectFolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectFolderSource.Location = new System.Drawing.Point(591, 9);
-            this.SelectFolderSource.Name = "SelectFolderSource";
-            this.SelectFolderSource.Size = new System.Drawing.Size(284, 38);
-            this.SelectFolderSource.TabIndex = 2;
-            this.SelectFolderSource.Text = "Select download folder";
-            this.SelectFolderSource.UseVisualStyleBackColor = true;
-            this.SelectFolderSource.Click += new System.EventHandler(this.SelectFolderSource_Click);
-            // 
-            // SelectFolderSave
-            // 
-            this.SelectFolderSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.SelectFolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectFolderSave.Location = new System.Drawing.Point(591, 49);
-            this.SelectFolderSave.Name = "SelectFolderSave";
-            this.SelectFolderSave.Size = new System.Drawing.Size(284, 38);
-            this.SelectFolderSave.TabIndex = 3;
-            this.SelectFolderSave.Text = "Select a folder to save";
-            this.SelectFolderSave.UseVisualStyleBackColor = true;
-            this.SelectFolderSave.Click += new System.EventHandler(this.SelectFolderSave_Click);
-            // 
-            // Сlear
-            // 
-            this.Сlear.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Сlear.Location = new System.Drawing.Point(3, 49);
-            this.Сlear.Name = "Сlear";
-            this.Сlear.Size = new System.Drawing.Size(202, 38);
-            this.Сlear.TabIndex = 4;
-            this.Сlear.Text = "Сlear";
-            this.Сlear.UseVisualStyleBackColor = true;
-            this.Сlear.Click += new System.EventHandler(this.Сlear_Click);
-            // 
-            // CountFiles
-            // 
-            this.CountFiles.AutoSize = true;
-            this.CountFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CountFiles.Location = new System.Drawing.Point(5, 9);
-            this.CountFiles.Name = "CountFiles";
-            this.CountFiles.Size = new System.Drawing.Size(110, 31);
-            this.CountFiles.TabIndex = 5;
-            this.CountFiles.Text = "Files: 0";
-            // 
-            // SaveCurrent
-            // 
-            this.SaveCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveCurrent.Location = new System.Drawing.Point(1295, 9);
-            this.SaveCurrent.Name = "SaveCurrent";
-            this.SaveCurrent.Size = new System.Drawing.Size(192, 38);
-            this.SaveCurrent.TabIndex = 6;
-            this.SaveCurrent.Text = "Save Current";
-            this.SaveCurrent.UseVisualStyleBackColor = true;
-            this.SaveCurrent.Click += new System.EventHandler(this.SaveCurrent_Click);
-            // 
-            // SaveAll
-            // 
-            this.SaveAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveAll.Location = new System.Drawing.Point(1295, 49);
-            this.SaveAll.Name = "SaveAll";
-            this.SaveAll.Size = new System.Drawing.Size(192, 38);
-            this.SaveAll.TabIndex = 7;
-            this.SaveAll.Text = "Save All";
-            this.SaveAll.UseVisualStyleBackColor = true;
-            this.SaveAll.Click += new System.EventHandler(this.SaveAll_Click);
-            // 
-            // ViolationtApply
-            // 
-            this.ViolationtApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ViolationtApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ViolationtApply.Location = new System.Drawing.Point(215, 49);
-            this.ViolationtApply.Name = "ViolationtApply";
-            this.ViolationtApply.Size = new System.Drawing.Size(364, 38);
-            this.ViolationtApply.TabIndex = 8;
-            this.ViolationtApply.Text = "Apply";
-            this.ViolationtApply.UseVisualStyleBackColor = true;
-            this.ViolationtApply.Click += new System.EventHandler(this.ViolationtApply_Click);
-            // 
-            // ViolatiosBox
-            // 
-            this.ViolatiosBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ViolatiosBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ViolatiosBox.FormattingEnabled = true;
-            this.ViolatiosBox.Location = new System.Drawing.Point(215, 10);
-            this.ViolatiosBox.Name = "ViolatiosBox";
-            this.ViolatiosBox.Size = new System.Drawing.Size(180, 32);
-            this.ViolatiosBox.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(116, 490);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 25);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "label1";
-            // 
-            // CameraBox
-            // 
-            this.CameraBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.CameraBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CameraBox.FormattingEnabled = true;
-            this.CameraBox.Location = new System.Drawing.Point(399, 10);
-            this.CameraBox.Name = "CameraBox";
-            this.CameraBox.Size = new System.Drawing.Size(180, 32);
-            this.CameraBox.TabIndex = 10;
             // 
             // UI
             // 
@@ -300,6 +314,7 @@ namespace Vviewer
         private System.Windows.Forms.ComboBox ViolatiosBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CameraBox;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
