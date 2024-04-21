@@ -165,7 +165,7 @@ namespace Vviewer
                         string searchViolation = (string)ViolationCode[searchViolationListFiles];
                         string searchCamera = filePatch[1];
 
-                        //label1.Text = searchViolationListFiles;
+                        // label1.Text = searchViolationListFiles;
 
                         if (searchCamera == CameraBox.SelectedItem.ToString() || CameraBox.SelectedIndex == 0)
                         {
