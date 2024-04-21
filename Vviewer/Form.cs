@@ -26,7 +26,7 @@ namespace Vviewer
             await Task.Run(async () =>
             {
               Pen pen = new Pen(Color.Black, 4);
-              for (int i = 40; i > 20; i--, await Task.Delay(30))
+              for (int i = 40; i > 20; i--, await Task.Delay(15))
               {
                 Drop.CreateGraphics().Clear(SystemColors.Control);
                 pen.DashPattern = new float[] { 20, i };
@@ -34,11 +34,5 @@ namespace Vviewer
               }
             });
         }
-
-
-
-
-
-
     }
 }

@@ -32,16 +32,34 @@ namespace Vviewer
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             this.Drop = new System.Windows.Forms.Panel();
+            this.imgBOX = new System.Windows.Forms.PictureBox();
+            this.Drop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
             this.SuspendLayout();
             // 
             // Drop
             // 
             this.Drop.AllowDrop = true;
+            this.Drop.Controls.Add(this.imgBOX);
             this.Drop.Location = new System.Drawing.Point(2, 2);
             this.Drop.Name = "Drop";
             this.Drop.Size = new System.Drawing.Size(1496, 816);
             this.Drop.TabIndex = 0;
             this.Drop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Drop_DragEnter);
+            // 
+            // imgBOX
+            // 
+            this.imgBOX.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.imgBOX.BackColor = System.Drawing.Color.Gray;
+            this.imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+            this.imgBOX.Location = new System.Drawing.Point(213, 3);
+            this.imgBOX.Name = "imgBOX";
+            this.imgBOX.Size = new System.Drawing.Size(1280, 720);
+            this.imgBOX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgBOX.TabIndex = 2;
+            this.imgBOX.TabStop = false;
             // 
             // UI
             // 
@@ -54,8 +72,10 @@ namespace Vviewer
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1515, 860);
             this.Name = "UI";
-            this.Text = "Violation viewer";
+            this.Text = "Vviewer";
             this.Load += new System.EventHandler(this.UI_Load);
+            this.Drop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -63,6 +83,7 @@ namespace Vviewer
         #endregion
 
         private System.Windows.Forms.Panel Drop;
+        private System.Windows.Forms.PictureBox imgBOX;
     }
 }
 
