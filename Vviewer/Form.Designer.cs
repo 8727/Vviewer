@@ -32,9 +32,9 @@ namespace Vviewer
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             this.Drop = new System.Windows.Forms.Panel();
-            this.imgBOX = new System.Windows.Forms.PictureBox();
-            this.listName = new System.Windows.Forms.ListBox();
             this.Control = new System.Windows.Forms.GroupBox();
+            this.listName = new System.Windows.Forms.ListBox();
+            this.imgBOX = new System.Windows.Forms.PictureBox();
             this.Drop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +54,30 @@ namespace Vviewer
             this.Drop.TabIndex = 0;
             this.Drop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Drop_DragEnter);
             // 
+            // Control
+            // 
+            this.Control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Control.Location = new System.Drawing.Point(4, 723);
+            this.Control.Name = "Control";
+            this.Control.Size = new System.Drawing.Size(1489, 91);
+            this.Control.TabIndex = 4;
+            this.Control.TabStop = false;
+            // 
+            // listName
+            // 
+            this.listName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.listName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listName.ForeColor = System.Drawing.Color.Black;
+            this.listName.FormattingEnabled = true;
+            this.listName.ItemHeight = 19;
+            this.listName.Location = new System.Drawing.Point(3, 3);
+            this.listName.Name = "listName";
+            this.listName.Size = new System.Drawing.Size(204, 726);
+            this.listName.TabIndex = 3;
+            // 
             // imgBOX
             // 
             this.imgBOX.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -67,26 +91,6 @@ namespace Vviewer
             this.imgBOX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgBOX.TabIndex = 2;
             this.imgBOX.TabStop = false;
-            // 
-            // listName
-            // 
-            this.listName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listName.FormattingEnabled = true;
-            this.listName.Location = new System.Drawing.Point(3, 3);
-            this.listName.Name = "listName";
-            this.listName.Size = new System.Drawing.Size(204, 719);
-            this.listName.TabIndex = 3;
-            // 
-            // Control
-            // 
-            this.Control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Control.Location = new System.Drawing.Point(4, 723);
-            this.Control.Name = "Control";
-            this.Control.Size = new System.Drawing.Size(1489, 91);
-            this.Control.TabIndex = 4;
-            this.Control.TabStop = false;
             // 
             // UI
             // 
