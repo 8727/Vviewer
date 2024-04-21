@@ -63,6 +63,7 @@ namespace Vviewer
             this.Drop.Name = "Drop";
             this.Drop.Size = new System.Drawing.Size(1496, 816);
             this.Drop.TabIndex = 0;
+            this.Drop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Drop_DragDrop);
             this.Drop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Drop_DragEnter);
             // 
             // Control
@@ -98,6 +99,7 @@ namespace Vviewer
             this.listName.Name = "listName";
             this.listName.Size = new System.Drawing.Size(204, 726);
             this.listName.TabIndex = 3;
+            this.listName.SelectedIndexChanged += new System.EventHandler(this.listName_SelectedIndexChanged);
             // 
             // imgBOX
             // 
@@ -146,6 +148,7 @@ namespace Vviewer
             this.SelectFolderSource.TabIndex = 2;
             this.SelectFolderSource.Text = "Select download folder";
             this.SelectFolderSource.UseVisualStyleBackColor = true;
+            this.SelectFolderSource.Click += new System.EventHandler(this.SelectFolderSource_Click);
             // 
             // SelectFolderSave
             // 
@@ -158,6 +161,7 @@ namespace Vviewer
             this.SelectFolderSave.TabIndex = 3;
             this.SelectFolderSave.Text = "Select a folder to save";
             this.SelectFolderSave.UseVisualStyleBackColor = true;
+            this.SelectFolderSave.Click += new System.EventHandler(this.SelectFolderSave_Click);
             // 
             // Сlear
             // 
@@ -168,6 +172,7 @@ namespace Vviewer
             this.Сlear.TabIndex = 4;
             this.Сlear.Text = "Сlear";
             this.Сlear.UseVisualStyleBackColor = true;
+            this.Сlear.Click += new System.EventHandler(this.Сlear_Click);
             // 
             // label1
             // 
@@ -190,6 +195,7 @@ namespace Vviewer
             this.SaveCurrent.TabIndex = 6;
             this.SaveCurrent.Text = "Save Current";
             this.SaveCurrent.UseVisualStyleBackColor = true;
+            this.SaveCurrent.Click += new System.EventHandler(this.SaveCurrent_Click);
             // 
             // SaveAll
             // 
@@ -202,6 +208,7 @@ namespace Vviewer
             this.SaveAll.TabIndex = 7;
             this.SaveAll.Text = "Save All";
             this.SaveAll.UseVisualStyleBackColor = true;
+            this.SaveAll.Click += new System.EventHandler(this.SaveAll_Click);
             // 
             // ViolationtApply
             // 
@@ -214,6 +221,7 @@ namespace Vviewer
             this.ViolationtApply.TabIndex = 8;
             this.ViolationtApply.Text = "Apply";
             this.ViolationtApply.UseVisualStyleBackColor = true;
+            this.ViolationtApply.Click += new System.EventHandler(this.ViolationtApply_Click);
             // 
             // comboBox1
             // 
