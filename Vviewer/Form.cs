@@ -52,6 +52,8 @@ namespace Vviewer
             FolderSave.Text = folders;
             ViolatiosBox.Items.Add("ALL - Violations");
             ViolatiosBox.SelectedIndex = 0;
+            CameraBox.Items.Add("ALL - Cameras");
+            CameraBox.SelectedIndex = 0;
             HashVuolation();
 
         }
@@ -239,7 +241,8 @@ namespace Vviewer
             xFile.Load(filename);
             if (xFile.SelectSingleNode("//v_photo_ts") != null)
             {
-                XmlNodeList violation_box = xFile.GetElementsByTagName("v_pr_viol");
+                XmlNodeList xmlviolation= xFile.GetElementsByTagName("v_pr_viol");
+                XmlNodeList xmlcamera = xFile.GetElementsByTagName("v_camera");
                 XmlNodeList xmlregno = xFile.GetElementsByTagName("v_regno");
                 string regno = xmlregno[0].InnerText;
 
@@ -255,17 +258,22 @@ namespace Vviewer
                     ListFiles.Add(NameFile, filename);
                     listName.Items.Add(NameFile);
 
-                    if (ViolatiosBox.FindString(violation_box[0].InnerText) == -1)
+                    if (ViolatiosBox.FindString(xmlviolation[0].InnerText) == -1)
                     {
-                        if (ViolationCode.ContainsKey(violation_box[0].InnerText))
+                        if (ViolationCode.ContainsKey(xmlviolation[0].InnerText))
                         {
-                            ViolatiosBox.Items.Add((string)ViolationCode[violation_box[0].InnerText]);
+                            ViolatiosBox.Items.Add((string)ViolationCode[xmlviolation[0].InnerText]);
                         }
                         else
                         {
-                            ViolatiosBox.Items.Add(violation_box[0].InnerText);
+                            ViolatiosBox.Items.Add(xmlviolation[0].InnerText);
                         }
                     }
+                    if (CameraBox.FindString(xmlcamera[0].InnerText) == -1)
+                    {
+                        CameraBox.Items.Add(xmlcamera[0].InnerText);
+                    }
+
                 }
             }
         }
