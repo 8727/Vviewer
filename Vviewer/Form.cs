@@ -280,14 +280,12 @@ namespace Vviewer
                 SaveCurrent.Enabled = false;
                 SaveAll.Enabled = false;
 
-
-                ICollection keys = ListFiles.Keys;
                 int y = 0;
                 await Task.Run(() =>
                 {
-                    foreach (string name in keys)
+                    foreach (var listNameFile in listName.Items)
                     {
-                        string[] x = (string[])ListFiles[name];
+                        string[] x = (string[])ListFiles[listNameFile];
                         listName.SetSelected(y, true);
                         SaveViolation(x[2], FolderSave.Text);
                         y++;
