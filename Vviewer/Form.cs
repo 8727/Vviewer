@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Linq;
 using System.Threading;
-using System.Windows.Input;
 
 namespace Vviewer
 {
@@ -24,6 +23,11 @@ namespace Vviewer
         Hashtable ListFiles = new Hashtable();
         List<String> NaneList = new List<String>();
         Hashtable ViolationCode = new Hashtable();
+        XmlDocument xFile = new XmlDocument();
+        XmlDocument xDoc = new XmlDocument();
+        CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+        FileInfo fil;
+
 
         void HashVuolation()
         {
@@ -199,7 +203,7 @@ namespace Vviewer
 
         void SelectFolderSource_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            
             dialog.InitialDirectory = FolderSource.Text;
             dialog.IsFolderPicker = true;
             dialog.Multiselect = true;
@@ -230,7 +234,6 @@ namespace Vviewer
 
         void SelectFolderSave_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.InitialDirectory = FolderSave.Text;
             dialog.IsFolderPicker = true;
             dialog.Multiselect = true;
@@ -307,7 +310,7 @@ namespace Vviewer
 
         void ReadFile(string filename)
         {
-            XmlDocument xFile = new XmlDocument();
+            
             xFile.Load(filename);
             if (xFile.SelectSingleNode("//v_photo_ts") != null)
             {
@@ -349,6 +352,7 @@ namespace Vviewer
 
                 }
             }
+            xFile.RemoveAll();
         }
 
         void ReadFolder(string path)
@@ -368,7 +372,6 @@ namespace Vviewer
 
         void ViewerIMG(string pathXML)
         {
-            XmlDocument xDoc = new XmlDocument();
             xDoc.Load(pathXML);
 
             XmlNodeList img = xDoc.GetElementsByTagName("v_photo_ts");
@@ -385,13 +388,10 @@ namespace Vviewer
 
         void SaveViolation(string pathXML, string saveFolder)
         {
-            XmlDocument xDoc = new XmlDocument();
             xDoc.Load(pathXML);
 
             if (xDoc.SelectSingleNode("//v_photo_ts") != null)
             {
-                FileInfo fil;
-
                 XmlNodeList violation_check_time = xDoc.GetElementsByTagName("v_time_check");
 
                 string data = violation_check_time[0].InnerText.Remove(violation_check_time[0].InnerText.IndexOf("T"));
