@@ -47,7 +47,6 @@ namespace Vviewer
             this.FolderSource = new System.Windows.Forms.TextBox();
             this.listName = new System.Windows.Forms.ListBox();
             this.imgBOX = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.Drop.SuspendLayout();
             this.Control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).BeginInit();
@@ -59,7 +58,6 @@ namespace Vviewer
             this.Drop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Drop.Controls.Add(this.label1);
             this.Drop.Controls.Add(this.progressBar);
             this.Drop.Controls.Add(this.Control);
             this.Drop.Controls.Add(this.listName);
@@ -263,16 +261,6 @@ namespace Vviewer
             this.imgBOX.TabIndex = 2;
             this.imgBOX.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(333, 454);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
-            // 
             // UI
             // 
             this.AllowDrop = true;
@@ -288,7 +276,6 @@ namespace Vviewer
             this.Text = "Vviewer";
             this.Load += new System.EventHandler(this.UI_Load);
             this.Drop.ResumeLayout(false);
-            this.Drop.PerformLayout();
             this.Control.ResumeLayout(false);
             this.Control.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBOX)).EndInit();
@@ -314,7 +301,6 @@ namespace Vviewer
         private System.Windows.Forms.ComboBox ViolatiosBox;
         private System.Windows.Forms.ComboBox CameraBox;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label label1;
     }
 }
 
