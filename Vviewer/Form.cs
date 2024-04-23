@@ -236,6 +236,7 @@ namespace Vviewer
         {
             
             dialog.InitialDirectory = FolderSource.Text;
+            dialog.AllowNonFileSystemItems = false;
             dialog.IsFolderPicker = true;
             dialog.Multiselect = true;
 
