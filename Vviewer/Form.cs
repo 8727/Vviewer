@@ -211,24 +211,7 @@ namespace Vviewer
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 FolderSource.Text = dialog.FileName;
-
-                new Thread(() =>
-                {
-                    Invoke((MethodInvoker)(() =>
-                    {
-                        ReadFolder(FolderSource.Text);
-
-                        if (listName.Items.Count > 0)
-                        {
-                            listName.SetSelected(0, true);
-                            CountFiles.Text = "Files: " + listName.Items.Count.ToString();
-                        }
-                        else
-                        {
-                            CountFiles.Text = "Files: 0";
-                        }
-                    }));
-                }).Start();
+                ReadFolder(FolderSource.Text);
             }
         }
 
@@ -280,17 +263,21 @@ namespace Vviewer
                 SaveCurrent.Enabled = false;
                 SaveAll.Enabled = false;
 
-                int y = 0;
+                progressBar.Maximum = listName.Items.Count;
+                progressBar.Visible = true;
+                progressBar.Value = 0;
+
                 await Task.Run(() =>
                 {
                     foreach (var listNameFile in listName.Items)
                     {
                         string[] x = (string[])ListFiles[listNameFile];
-                        listName.SetSelected(y, true);
+                        progressBar.PerformStep();
                         SaveViolation(x[2], FolderSave.Text);
-                        y++;
                     }
                 });
+
+                progressBar.Visible = false;
 
                 Сlear.Enabled = true;
                 SelectFolderSource.Enabled = true;
@@ -353,19 +340,32 @@ namespace Vviewer
             xFile.RemoveAll();
         }
 
-        void ReadFolder(string path)
+        async void ReadFolder(string path)
         {
             string[] tempfiles = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
             progressBar.Maximum = tempfiles.Count();
             progressBar.Visible = true;
             progressBar.Value = 0;
 
-            foreach (string file in tempfiles)
+            await Task.Run(() =>
             {
-                progressBar.PerformStep();
-                ReadFile(file);
-            }
+                foreach (string file in tempfiles)
+                {
+                    progressBar.PerformStep();
+                    ReadFile(file);
+                }
+            });
             progressBar.Visible = false;
+
+            if (listName.Items.Count > 0)
+            {
+                listName.SetSelected(0, true);
+                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+            }
+            else
+            {
+                CountFiles.Text = "Files: 0";
+            }
         }
 
         void ViewerIMG(string pathXML)
