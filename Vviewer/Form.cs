@@ -175,7 +175,7 @@ namespace Vviewer
             ViolatiosBox.Items.Clear();
             CameraBox.Items.Clear();
             CountFiles.Text = "Files: 0";
-            imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+            imgBOX.Image = Properties.Resources.filenotselected;
             ViolatiosBox.Items.Add("ALL - Violations");
             ViolatiosBox.SelectedIndex = 0;
             CameraBox.Items.Add("ALL - Cameras");
@@ -504,7 +504,7 @@ namespace Vviewer
             {
                 listName.Items.Clear();
                 CountFiles.Text = "Files: 0";
-                imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+                imgBOX.Image = Properties.Resources.filenotselected;
 
                 if (ViolatiosBox.SelectedIndex >= 0)
                 {
@@ -515,10 +515,6 @@ namespace Vviewer
                     MessageBox.Show("Select a camera or violation from the drop-down list.", "Selection Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
-            {
-                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         void CameraBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -527,7 +523,7 @@ namespace Vviewer
             {
                 listName.Items.Clear();
                 CountFiles.Text = "Files: 0";
-                imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+                imgBOX.Image = Properties.Resources.filenotselected;
 
                 if (CameraBox.SelectedIndex >= 0)
                 {
@@ -537,10 +533,6 @@ namespace Vviewer
                 {
                     MessageBox.Show("Select a camera or violation from the drop-down list.", "Selection Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

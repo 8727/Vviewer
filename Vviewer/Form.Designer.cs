@@ -36,7 +36,6 @@ namespace Vviewer
             this.Control = new System.Windows.Forms.GroupBox();
             this.CameraBox = new System.Windows.Forms.ComboBox();
             this.ViolatiosBox = new System.Windows.Forms.ComboBox();
-            this.ViolationtApply = new System.Windows.Forms.Button();
             this.SaveAll = new System.Windows.Forms.Button();
             this.SaveCurrent = new System.Windows.Forms.Button();
             this.CountFiles = new System.Windows.Forms.Label();
@@ -87,7 +86,6 @@ namespace Vviewer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Control.Controls.Add(this.CameraBox);
             this.Control.Controls.Add(this.ViolatiosBox);
-            this.Control.Controls.Add(this.ViolationtApply);
             this.Control.Controls.Add(this.SaveAll);
             this.Control.Controls.Add(this.SaveCurrent);
             this.Control.Controls.Add(this.CountFiles);
@@ -108,9 +106,9 @@ namespace Vviewer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.CameraBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CameraBox.FormattingEnabled = true;
-            this.CameraBox.Location = new System.Drawing.Point(399, 10);
+            this.CameraBox.Location = new System.Drawing.Point(215, 52);
             this.CameraBox.Name = "CameraBox";
-            this.CameraBox.Size = new System.Drawing.Size(180, 32);
+            this.CameraBox.Size = new System.Drawing.Size(364, 32);
             this.CameraBox.TabIndex = 10;
             this.CameraBox.SelectedIndexChanged += new System.EventHandler(this.CameraBox_SelectedIndexChanged);
             // 
@@ -120,24 +118,11 @@ namespace Vviewer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ViolatiosBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ViolatiosBox.FormattingEnabled = true;
-            this.ViolatiosBox.Location = new System.Drawing.Point(215, 10);
+            this.ViolatiosBox.Location = new System.Drawing.Point(215, 12);
             this.ViolatiosBox.Name = "ViolatiosBox";
-            this.ViolatiosBox.Size = new System.Drawing.Size(180, 32);
+            this.ViolatiosBox.Size = new System.Drawing.Size(364, 32);
             this.ViolatiosBox.TabIndex = 9;
             this.ViolatiosBox.SelectedIndexChanged += new System.EventHandler(this.ViolatiosBox_SelectedIndexChanged);
-            // 
-            // ViolationtApply
-            // 
-            this.ViolationtApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ViolationtApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ViolationtApply.Location = new System.Drawing.Point(215, 49);
-            this.ViolationtApply.Name = "ViolationtApply";
-            this.ViolationtApply.Size = new System.Drawing.Size(364, 38);
-            this.ViolationtApply.TabIndex = 8;
-            this.ViolationtApply.Text = "Apply";
-            this.ViolationtApply.UseVisualStyleBackColor = true;
-            this.ViolationtApply.Click += new System.EventHandler(this.ViolationtApply_Click);
             // 
             // SaveAll
             // 
@@ -299,7 +284,6 @@ namespace Vviewer
         private System.Windows.Forms.Label CountFiles;
         private System.Windows.Forms.Button SaveAll;
         private System.Windows.Forms.Button SaveCurrent;
-        private System.Windows.Forms.Button ViolationtApply;
         private System.Windows.Forms.ComboBox ViolatiosBox;
         private System.Windows.Forms.ComboBox CameraBox;
         private System.Windows.Forms.ProgressBar progressBar;
