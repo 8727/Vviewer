@@ -112,6 +112,7 @@ namespace Vviewer
             this.CameraBox.Name = "CameraBox";
             this.CameraBox.Size = new System.Drawing.Size(180, 32);
             this.CameraBox.TabIndex = 10;
+            this.CameraBox.SelectedIndexChanged += new System.EventHandler(this.CameraBox_SelectedIndexChanged);
             // 
             // ViolatiosBox
             // 
@@ -123,6 +124,7 @@ namespace Vviewer
             this.ViolatiosBox.Name = "ViolatiosBox";
             this.ViolatiosBox.Size = new System.Drawing.Size(180, 32);
             this.ViolatiosBox.TabIndex = 9;
+            this.ViolatiosBox.SelectedIndexChanged += new System.EventHandler(this.ViolatiosBox_SelectedIndexChanged);
             // 
             // ViolationtApply
             // 
@@ -215,10 +217,10 @@ namespace Vviewer
             this.FolderSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FolderSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FolderSave.Location = new System.Drawing.Point(881, 52);
             this.FolderSave.Name = "FolderSave";
-            this.FolderSave.Size = new System.Drawing.Size(398, 29);
+            this.FolderSave.Size = new System.Drawing.Size(398, 26);
             this.FolderSave.TabIndex = 1;
             // 
             // FolderSource
@@ -226,10 +228,10 @@ namespace Vviewer
             this.FolderSource.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FolderSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FolderSource.Location = new System.Drawing.Point(881, 14);
             this.FolderSource.Name = "FolderSource";
-            this.FolderSource.Size = new System.Drawing.Size(398, 29);
+            this.FolderSource.Size = new System.Drawing.Size(398, 26);
             this.FolderSource.TabIndex = 0;
             // 
             // listName
@@ -267,7 +269,7 @@ namespace Vviewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1500, 821);
+            this.ClientSize = new System.Drawing.Size(1500, 825);
             this.Controls.Add(this.Drop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1515, 860);

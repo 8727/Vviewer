@@ -37,6 +37,7 @@ namespace Vviewer
             ViolationCode.Add("5", "5 - BusLane");
             ViolationCode.Add("10", "10 - RedLightCross");
             ViolationCode.Add("31", "31 - SeatBelt");
+            ViolationCode.Add("32", "32 - PhoneInHand");
             ViolationCode.Add("81", "81 - WrongCross");
             ViolationCode.Add("83", "83 - StopLine");
             ViolationCode.Add("90", "90 - WrongTurnTwoFrontier");
@@ -44,6 +45,7 @@ namespace Vviewer
             ViolationCode.Add("113", "113 - NoForwardZnak");
             ViolationCode.Add("114", "114 - NoUTurnOnlyForward");
             ViolationCode.Add("127", "127 - Lights");
+            ViolationCode.Add("134", "134 - SeatBelt_Passanger");
         }
 
         void UI_Load(object sender, EventArgs e)
@@ -76,6 +78,35 @@ namespace Vviewer
                 name = NameCreation(name);
             }
             return name;
+        }
+
+        void LoadList()
+        {
+            ICollection keys = ListFiles.Keys;
+            foreach (String NameFile in keys)
+            {
+                string[] filePatch = (string[])ListFiles[NameFile];
+                string searchViolationListFiles = filePatch[0];
+                string searchViolation = (string)ViolationCode[searchViolationListFiles];
+                string searchCamera = filePatch[1];
+
+                if (searchCamera == CameraBox.SelectedItem.ToString() || CameraBox.SelectedIndex == 0)
+                {
+                    if (searchViolation == ViolatiosBox.SelectedItem.ToString() || ViolatiosBox.SelectedIndex == 0)
+                    {
+                        listName.Items.Add(NameFile);
+                    }
+                }
+            }
+            if (listName.Items.Count > 0)
+            {
+                listName.SetSelected(0, true);
+                CountFiles.Text = "Files: " + listName.Items.Count.ToString();
+            }
+            else
+            {
+                CountFiles.Text = "Files: 0";
+            }
         }
 
         async void Drop_DragEnter(object sender, DragEventArgs e)
@@ -464,6 +495,52 @@ namespace Vviewer
                 }
             }
 
+        }
+
+        void ViolatiosBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ListFiles.Count > 0)
+            {
+                listName.Items.Clear();
+                CountFiles.Text = "Files: 0";
+                imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+
+                if (ViolatiosBox.SelectedIndex >= 0)
+                {
+                    LoadList();
+                }
+                else
+                {
+                    MessageBox.Show("Select a camera or violation from the drop-down list.", "Selection Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        void CameraBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ListFiles.Count > 0)
+            {
+                listName.Items.Clear();
+                CountFiles.Text = "Files: 0";
+                imgBOX.Image = global::Vviewer.Properties.Resources.filenotselected;
+
+                if (CameraBox.SelectedIndex >= 0)
+                {
+                    LoadList();
+                }
+                else
+                {
+                    MessageBox.Show("Select a camera or violation from the drop-down list.", "Selection Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Load the data into the program.", "No data.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
