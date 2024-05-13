@@ -458,7 +458,7 @@ namespace Vviewer
 
                 GC.Collect();
 
-                int index = violation_type_photo.Count;
+                int index = violation_photo_extra.Count;
 
                 while (index > 0)
                 {
