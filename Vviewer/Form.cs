@@ -232,7 +232,7 @@ namespace Vviewer
             }
         }
 
-        void SelectFolderSource_Click(object sender, EventArgs e)
+        async void SelectFolderSource_Click(object sender, EventArgs e)
         {
             
             dialog.InitialDirectory = FolderSource.Text;
@@ -242,8 +242,12 @@ namespace Vviewer
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                FolderSource.Text = dialog.FileName;
-                ReadFolder(FolderSource.Text);
+                foreach (String file in dialog.FileNames)
+                {
+                    FolderSource.Text = file;
+                    await ReadFolder(file);
+                }
+
             }
         }
 
@@ -372,7 +376,9 @@ namespace Vviewer
             xFile.RemoveAll();
         }
 
-        async void ReadFolder(string path)
+        async 
+        Task
+ReadFolder(string path)
         {
             string[] tempfiles = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
             progressBar.Maximum = tempfiles.Count();
