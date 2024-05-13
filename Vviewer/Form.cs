@@ -376,9 +376,7 @@ namespace Vviewer
             xFile.RemoveAll();
         }
 
-        async 
-        Task
-ReadFolder(string path)
+        async Task ReadFolder(string path)
         {
             string[] tempfiles = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
             progressBar.Maximum = tempfiles.Count();
