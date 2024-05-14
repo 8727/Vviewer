@@ -429,8 +429,8 @@ namespace Vviewer
                 XmlNodeList violation_check_time = xDoc.GetElementsByTagName("v_time_check");
 
                 string data = violation_check_time[0].InnerText.Remove(violation_check_time[0].InnerText.IndexOf("T"));
-                string datatime = violation_check_time[0].InnerText.Remove(violation_check_time[0].InnerText.IndexOf(".") - 3);
-                datatime = datatime.Substring(datatime.IndexOf("T") + 1);
+                string datatime = violation_check_time[0].InnerText.Substring(violation_check_time[0].InnerText.IndexOf("T")+1);
+                datatime = datatime.Remove(5);
 
                 XmlNodeList violation_camera = xDoc.GetElementsByTagName("v_camera");
                 XmlNodeList violation_regno = xDoc.GetElementsByTagName("v_regno");
