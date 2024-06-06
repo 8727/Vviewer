@@ -87,7 +87,15 @@ namespace Vviewer
             {
                 string[] filePatch = (string[])ListFiles[NameFile];
                 string searchViolationListFiles = filePatch[0];
-                string searchViolation = (string)ViolationCode[searchViolationListFiles];
+                string searchViolation;
+                if (ViolationCode.ContainsKey(searchViolationListFiles))
+                {
+                    searchViolation = (string)ViolationCode[searchViolationListFiles];
+                }
+                else
+                {
+                    searchViolation = searchViolationListFiles;
+                }
                 string searchCamera = filePatch[1];
 
                 if (searchCamera == CameraBox.SelectedItem.ToString() || CameraBox.SelectedIndex == 0)
